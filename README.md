@@ -1,34 +1,95 @@
 # Adkulan Web
 
-This is the web application for Adkulan, built with Next.js, Prisma, and Tailwind CSS.
+Корпоративный веб-сайт и веб-приложение для компании «Адкулан», разработанное с использованием современных веб-технологий. Проект представляет собой платформу для презентации продукции, управления контентом и взаимодействия с клиентами.
 
-## Getting Started
+## 🛠 Технологический стек
 
-1.  **Install dependencies:**
+Проект построен на базе мощного и современного стека технологий:
+
+*   **Framework:** [Next.js 16 (App Router)](https://nextjs.org) — Фреймворк React для server-side rendering и статической генерации.
+*   **Language:** [TypeScript](https://www.typescriptlang.org) — Строгая типизация для надежности кода.
+*   **Styling:** [Tailwind CSS](https://tailwindcss.com) — Утилитарный CSS-фреймворк для быстрой и гибкой верстки.
+*   **Database & ORM:**
+    *   [Prisma](https://www.prisma.io) — Современная ORM для удобной работы с базой данных.
+    *   [SQLite](https://www.sqlite.org) — Используется для разработки (легко заменяется на PostgreSQL/MySQL в продакшене).
+*   **Animation:** [GSAP](https://greensock.com/gsap) и [Lenis](https://github.com/studio-freight/lenis) — Для плавных анимаций и скроллинга.
+*   **Content Editing:** [Quill](https://quilljs.com) — Rich-text редактор для управления контентом в админ-панели.
+*   **Authentication:** Custom Auth (Server Actions & Session Management).
+
+## 🚀 Основной функционал
+
+*   **Публичная часть:**
+    *   Главная страница с анимациями и интерактивными элементами.
+    *   Каталог продукции с фильтрацией и иерархией категорий.
+    *   Детальные страницы товаров.
+    *   Информационные страницы (О компании, Лицензии, Контакты).
+*   **Административная панель:**
+    *   Управление товарами, категориями и брендами.
+    *   Редактирование контента страниц.
+    *   Управление пользователями и правами доступа.
+    *   Просмотр базовой статистики.
+
+## 📦 Установка и запуск
+
+Следуйте этим шагам, чтобы развернуть проект локально:
+
+1.  **Клонируйте репозиторий:**
+    ```bash
+    git clone https://github.com/ваш-логин/adkulan-web.git
+    cd adkulan-web
+    ```
+
+2.  **Установите зависимости:**
     ```bash
     npm install
     ```
 
-2.  **Set up environment variables:**
-    Create a `.env` file with the necessary variables.
+3.  **Настройка окружения:**
+    Создайте файл `.env` в корне проекта. Пример переменных (если применимо):
+    ```env
+    # Пример (точные переменные зависят от вашей конфигурации)
+    DATABASE_URL="file:./dev.db"
+    SESSION_SECRET="ваш-секретный-ключ"
+    ```
 
-3.  **Run the development server:**
+4.  **Подготовка базы данных:**
+    ```bash
+    # Создание миграций и применение схемы
+    npx prisma migrate dev --name init
+    
+    # (Опционально) Заполнение тестовыми данными
+    # node prisma/seed.js
+    ```
+
+5.  **Запуск в режиме разработки:**
     ```bash
     npm run dev
     ```
+    Откройте [http://localhost:3000](http://localhost:3000) в вашем браузере.
 
-    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📜 Доступные скрипты
 
-## Tech Stack
+В файле `package.json` определены следующие команды:
 
-*   [Next.js](https://nextjs.org) - React Framework
-*   [Prisma](https://www.prisma.io) - ORM
-*   [Tailwind CSS](https://tailwindcss.com) - Styling
-*   [SQLite](https://www.sqlite.org) - Database (Development)
+*   `npm run dev`: Запуск сервера разработки с горячей перезагрузкой.
+*   `npm run build`: Сборка оптимизированного приложения для продакшена.
+*   `npm start`: Запуск собранного приложения (требует предварительной сборки).
+*   `npm run lint`: Проверка кода линтером ESLint.
 
-## Scripts
+## 📂 Структура проекта
 
-*   `npm run dev`: Runs the development server.
-*   `npm run build`: Builds the application for production.
-*   `npm start`: Starts the production server.
-*   `npm run lint`: Runs ESLint.
+Основные директории проекта:
+
+*   `src/app`: Страницы и маршрутизация (Next.js App Router).
+    *   `(site)`: Публичные страницы сайта.
+    *   `admin`: Страницы административной панели.
+    *   `api`: API роуты (если используются).
+    *   `actions`: Серверные действия (Server Actions) для обработки данных.
+*   `src/components`: Переиспользуемые React-компоненты.
+*   `src/lib`: Утилиты, конфигурации библиотек (Prisma, Auth и т.д.).
+*   `src/context`: React Context провайдеры (темы, состояние).
+*   `prisma`: Схема базы данных и миграции.
+*   `public`: Статические файлы (изображения, шрифты).
+
+---
+© 2026 Adkulan. Все права защищены.
