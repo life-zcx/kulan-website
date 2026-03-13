@@ -6,9 +6,9 @@ import { revalidatePath } from 'next/cache';
 import bcrypt from 'bcryptjs';
 import { CreateUserSchema, UpdateUserSchema } from '@/lib/validations';
 import type { FormState } from '@/types';
-import { Prisma } from '@prisma/client';
 
-export async function createUser(prevState: FormState | undefined, formData: FormData): Promise<FormState | never> {
+
+export async function createUser(formData: FormData): Promise<void | never> {
     const validatedFields = CreateUserSchema.safeParse({
         name: formData.get('name'),
         email: formData.get('email'),
@@ -17,10 +17,7 @@ export async function createUser(prevState: FormState | undefined, formData: For
     });
 
     if (!validatedFields.success) {
-        return {
-            error: 'Неверные данные формы',
-            errors: validatedFields.error.flatten().fieldErrors,
-        };
+        return;
     }
 
     const { name, email, password, role } = validatedFields.data;
@@ -38,14 +35,13 @@ export async function createUser(prevState: FormState | undefined, formData: For
         });
     } catch (error) {
         console.error('Error creating user:', error);
-        return { error: 'Ошибка создания пользователя (возможно email занят)' };
     }
 
     revalidatePath('/admin/users');
     redirect('/admin/users');
 }
 
-export async function updateUser(formData: FormData): Promise<FormState | never> {
+export async function updateUser(formData: FormData): Promise<void | never> {
     const validatedFields = UpdateUserSchema.safeParse({
         id: formData.get('id'),
         name: formData.get('name'),
@@ -55,16 +51,13 @@ export async function updateUser(formData: FormData): Promise<FormState | never>
     });
 
     if (!validatedFields.success) {
-        return {
-            error: 'Неверные данные формы',
-            errors: validatedFields.error.flatten().fieldErrors,
-        };
+        return;
     }
 
     const { id, name, email, password, role } = validatedFields.data;
 
     try {
-        const updateData: Prisma.UserUpdateInput = {
+        const updateData: any = {
             name,
             email,
             role,
@@ -82,7 +75,6 @@ export async function updateUser(formData: FormData): Promise<FormState | never>
 
     } catch (error) {
         console.error('Error updating user:', error);
-        return { error: 'Ошибка обновления пользователя' };
     }
 
     revalidatePath('/admin/users');

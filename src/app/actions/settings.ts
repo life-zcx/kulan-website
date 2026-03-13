@@ -21,10 +21,8 @@ export async function updateSiteSettings(formData: FormData) {
         }
         revalidatePath('/');
         revalidatePath('/admin/stats');
-        return { success: true };
     } catch (error) {
         console.error("Failed to update settings:", error);
-        return { success: false, error: "Failed to update settings" };
     }
 }
 

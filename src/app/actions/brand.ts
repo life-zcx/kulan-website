@@ -44,10 +44,10 @@ export async function updateBrand(formData: FormData) {
     const name = formData.get('name') as string;
     const imageFile = formData.get('logo') as File;
 
-    if (!id || !name) return { error: 'Missing Data' };
+    if (!id || !name) return;
 
     const brand = await prisma.brand.findUnique({ where: { id: parseInt(id) } });
-    if (!brand) return { error: 'Brand not found' };
+    if (!brand) return;
 
     let logoPath = brand.logo;
     if (imageFile && imageFile.size > 0) {

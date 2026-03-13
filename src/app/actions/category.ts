@@ -36,7 +36,7 @@ export async function updateCategory(formData: FormData) {
 
     const parentId = parentIdStr ? parseInt(parentIdStr) : null;
 
-    if (!id || !title) return { error: 'Missing Data' };
+    if (!id || !title) return;
 
     await prisma.category.update({
         where: { id: parseInt(id) },
