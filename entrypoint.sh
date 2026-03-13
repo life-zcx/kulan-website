@@ -2,12 +2,12 @@
 
 # Применяем миграции Prisma
 echo "Running prisma migrate deploy..."
-npx prisma migrate deploy --schema=./prisma/schema.prisma
+npx prisma migrate deploy
 
 # Если нужно создать админа (опционально)
 # echo "Creating admin user..."
 # node create-admin.js
 
-# Запускаем само приложение
+# Запуск приложения
 echo "Starting application..."
-exec node server.js
+node server.js
