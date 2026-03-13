@@ -126,7 +126,7 @@ export default function ProductForm({ initialData, categories, brands }: Product
 
         try {
             const result = isEditMode ? await updateProduct(formData) : await createProduct(formData);
-            if (result?.error) {
+            if (result && !result.success) {
                 setError(result.error);
                 setIsPending(false);
             } else {
