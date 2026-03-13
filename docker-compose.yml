@@ -8,8 +8,8 @@ services:
     ports:
       - "3005:3000" # Используем уникальный порт, чтобы не конфликтовать с другими сайтами
     environment:
-      - DATABASE_URL=file:./data/prod.db
-      - SESSION_SECRET=change-me-at-least-32-chars-long
+      - DATABASE_URL=file:/app/data/prod.db
+      - SESSION_SECRET=change-this-to-a-very-secure-random-string
       - NEXT_PUBLIC_SITE_URL=https://adkulan.shop
     volumes:
-      - ./prisma/data:/app/prisma/data
+      - ./data:/app/data

@@ -2,7 +2,7 @@
 
 # Применяем миграции Prisma
 echo "Running prisma migrate deploy..."
-npx prisma migrate deploy
+./node_modules/.bin/prisma migrate deploy --schema=./prisma/schema.prisma
 
 # Если нужно создать админа (опционально)
 # echo "Creating admin user..."
