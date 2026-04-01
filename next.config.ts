@@ -21,6 +21,11 @@ const nextConfig: NextConfig = {
         hostname: 'adkulan.shop',
         pathname: '/**',
       },
+      {
+        protocol: 'https', // or http if not SSL
+        hostname: 'adkulan.ru',
+        pathname: '/**',
+      },
     ],
   },
   experimental: {
